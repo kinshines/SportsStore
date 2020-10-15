@@ -1,0 +1,25 @@
+﻿version: "3"
+services:
+    sportsstore:
+        build: .
+        ports:
+            - "5000:5000"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
+        depends_on:
+            - mysql
+    mysql:
+        image: "mysql:8.0.19"
+        container_name: mysql
+        restart: always
+        volumes:
+        - ./mysql:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=root
+            - MYSQL_DATABASE=sportsstore
+        ports:
+            -  "3306:3306"
+        expose:
+            - 3306
